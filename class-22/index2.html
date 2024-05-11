@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Comment System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="commentForm">
+        <textArea id="commentInput" placeholder="Write a comment..."></textArea>
+        <button id="submitComment">Comment</button>
+    </div>
+    <div id="commentsContainer">
+        <div class="repliesContainer">
+            <p>some comment</p>
+            <button class="replyBtn">Reply</button>
+            <textArea class="replyInput" placeholder="write a reply..."></textArea>
+            <div class="repliesContainer">
+                <p>some reply</p>
+                <button class="replyBtn">Reply</button>
+                <textarea class="replyInput" placeholder="Write a reply..."></textarea>
+            </div>
+        </div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>

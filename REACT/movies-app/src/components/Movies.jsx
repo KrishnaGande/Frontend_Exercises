@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import Pagination from "./Pagination";
 import MovieCard from "./MovieCard";
+import axios from "axios";
+import {WatchListContext} from '../context/WatchListContext';
 /*eslint-disable*/
 function Movies(){
     const [pageNo,setPageNo]=useState(1);
+    const [movies,setMovies]=useState([]);
+    const {watchlist,addToWatchlist,removeFromWatchlist}=useContext(WatchListContext);
+    
+
+    useEffect(()=>{
+    axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=a981769ddba1ce973560b980afd007f8&language=en-US&page=${pageNo}`)
+    .then(function(res){
+        console.log(res.data.results);
+        setMovies(res.data.results);
+    })
+    },[pageNo]);
 
     const handleNext=()=>{
         setPageNo(pageNo+1)
@@ -16,28 +29,6 @@ function Movies(){
             setPageNo(pageNo-1);
         }
     }
-    const [movies,setMovies]=useState([
-        {
-            url:'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)',
-            title:'Movie 1'
-        },
-        {
-            url:'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)',
-            title:'Movie 2'
-        },
-        {
-            url:'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)',
-            title:'Movie 3'
-        },
-        {
-            url:'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)',
-            title:'Movie 4'
-        },
-        {
-            url:'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)',
-            title:'Movie 5'
-        }
-    ]);
 
     return (
         <>
@@ -48,7 +39,7 @@ function Movies(){
                 {movies.map((movieObj,idx)=>{
                     return (
                         <>
-                            <MovieCard movieObj={movieObj} index={idx}/>
+                            <MovieCard movieObj={movieObj} index={idx} addToWatchlist={addToWatchlist} watchlist={watchlist} removeFromWatchlist={removeFromWatchlist} />
                         </>
                     );
                 })}

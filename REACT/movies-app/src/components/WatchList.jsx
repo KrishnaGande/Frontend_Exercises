@@ -50,10 +50,12 @@ function WatchList(){
                 {genreList.map((genre) => {
                     const isActive = currGenre === genre;
                     const baseStyles =
-                    "flex justify-center items-center h-[3rem] w-[9rem] rounded-xltext-white font-bold mx-4";
+                    "flex justify-center items-center h-[3rem] w-[8rem] rounded-lg text-white font-bold mx-4 hover:cursor-pointer";
                     const bgColor = isActive ? "bg-blue-400" : "bg-gray-400/50";
                     // eslint-disable-next-line react/jsx-key
-                    return (<div onClick={handleFilter} className={`${baseStyles} ${bgColor}`}>{genre}</div>);
+                    return (<div 
+                            onClick={()=>handleFilter(genre)} 
+                            className={`${baseStyles} ${bgColor}`}>{genre}</div>);
                 })}
             </div>
             <div className="flex justify-center my-10">
@@ -74,11 +76,11 @@ function WatchList(){
                             <th>
                                 <div className="flex">
                                     <i
-                                    onClick={handleAscendingRatings} 
+                                    onClick={handleDescendingRatings} 
                                     className="fa-solid fa-arrow-up hover:cursor-pointer mx-1"></i>
                                     <div>Ratings</div>
                                     <i 
-                                    onClick={handleDescendingRatings}
+                                    onClick={handleAscendingRatings}
                                     className="fa-solid fa-arrow-down hover:cursor-pointer mx-1"></i>
                                 </div>
                             </th>

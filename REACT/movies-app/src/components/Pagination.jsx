@@ -1,6 +1,19 @@
 /*eslint-disable*/
+import PaginationSlice from '../redux/PaginationSlice';
+const paginationActions=PaginationSlice.actions;
+import { useSelector,useDispatch } from 'react-redux';
 
-function Pagination({nextPageFn,previousPageFn,pageNumber}) {
+function Pagination() {
+  const {pageNo}=useSelector((state)=> {return state.PaginationSlice});
+
+  const dispatch=useDispatch();
+  const nextPageFn=()=>{
+    dispatch(paginationActions.handleNext())
+  }
+  const previousPageFn=()=>{
+    dispatch(paginationActions.handlePrev())
+  }
+
   return (
     <div>
         <div className="bg-gray-400 p-4 h-[50px] w-full mt-8 flex justify-center gap-2">
@@ -8,7 +21,7 @@ function Pagination({nextPageFn,previousPageFn,pageNumber}) {
                     <i class="fa-solid fa-arrow-left"></i>
                 </div>
                 <div >
-                    {pageNumber}
+                    {pageNo}
                 </div>
                 <div onClick={nextPageFn} className="px-8">
                     <i class='fa-solid fa-arrow-right'></i>
